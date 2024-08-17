@@ -34,7 +34,7 @@ export default function InsertProduct() {
         setError("");
 
         try {
-            const res = await fetch("http://localhost:4000/insertproduct", {
+            const res = await fetch("https://crud-task-s8b4.onrender.com/insertproduct", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

@@ -36,7 +36,7 @@ export default function Products() {
 
     const deleteProduct = async (id) => {
 
-        const response = await fetch(`http://localhost:4000/deleteproduct/${id}`, {
+        const response = await fetch(`https://crud-task-s8b4.onrender.com/deleteproduct/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
