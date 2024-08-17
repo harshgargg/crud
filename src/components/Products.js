@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import { MdEditSquare,MdDelete  } from "react-icons/md";
 
 export default function Products() {
 
@@ -12,7 +13,7 @@ export default function Products() {
     const getProducts = async (e) => {
 
         try {
-            const res = await fetch("http://localhost:3001/products", {
+            const res = await fetch("http://localhost:4000/products", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -35,7 +36,7 @@ export default function Products() {
 
     const deleteProduct = async (id) => {
 
-        const response = await fetch(`http://localhost:3001/deleteproduct/${id}`, {
+        const response = await fetch(`http://localhost:4000/deleteproduct/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
@@ -55,24 +56,22 @@ export default function Products() {
     }
 
     return (
-        <>
-
-
-            <div className='container-fluid p-5'>
-                <h1>Products Inventory</h1>
-                <div className='add_button'>
-                    <NavLink to="/insertproduct" className='btn btn-primary fs-5'> + Add New Product</NavLink>
+        <div className='h-[100vh] flex justify-center items-center'>
+            <div className='w-11/12 bg-black text-white h-[60vh] p-4 rounded-xl shadow-2xl shadow-blue-700'>
+                <h1 className='text-4xl font-serif'>Products Inventory</h1>
+                <div className='flex justify-end'>
+                    <NavLink to="/insertproduct" className='bg-blue-500 p-2 text-white rounded-md '> + Add New Product</NavLink>
                 </div>
-                <div className="overflow-auto mt-3" style={{ maxHeight: "38rem" }}>
-                    <table className="table table-striped table-hover mt-3 fs-5">
-                        <thead>
-                            <tr className="tr_color">
-                                <th scope="col">#</th>
-                                <th scope="col">Product Name</th>
-                                <th scope="col">Product Price</th>
-                                <th scope="col">Product Barcode</th>
-                                <th scope="col">Update</th>
-                                <th scope="col">Delete</th>
+                <div className="mt-7">
+                    <table className='w-full'>
+                        <thead className=' h-[40px] text-white'>
+                            <tr className='w-[100%] text-left'>
+                                <th className='w-[10%] px-2'>#</th>
+                                <th className='w-[20%] uppercase'>Product Name</th>
+                                <th className='w-[20%] uppercase'>Product Price</th>
+                                <th className='w-[20%] uppercase'>Product Barcode</th>
+                                <th className='w-[10%] uppercase'>Update</th>
+                                <th className='w-[10%] uppercase'>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -81,14 +80,21 @@ export default function Products() {
                                 productData.map((element, id) => {
                                     return (
                                         <>
-                                            <tr>
-                                                <th scope="row">{id + 1}</th>
-                                                <td>{element.ProductName}</td>
-                                                <td>{element.ProductPrice}</td>
-                                                <td>{element.ProductBarcode}</td>
-
-                                                <td><NavLink to={`/updateproduct/${element._id}`} className="btn btn-primary"><i className="fa-solid fa-pen-to-square"></i></NavLink></td>
-                                                <td><button className="btn btn-danger" onClick={() => deleteProduct(element._id)}><i class="fa-solid fa-trash"></i></button></td>
+                                            <tr className='bg-white border h-[40px] hover:bg-blue-100 text-black'>
+                                                <td className='w-[10%] px-2'>{id + 1}</td>
+                                                <td className='w-[20%]'>{element.ProductName}</td>
+                                                <td className='w-[20%]'>{element.ProductPrice}</td>
+                                                <td className='w-[20%]'>{element.ProductBarcode}</td>
+                                                <td className='w-[10%]'>
+                                                    <NavLink className='text-blue-500 text-2xl cursor-pointer' to={`/updateproduct/${element._id}`}>
+                                                        <MdEditSquare/>
+                                                    </NavLink>
+                                                </td>
+                                                <td className='w-[10%]'>
+                                                    <button className="text-red-500 text-2xl" onClick={() => deleteProduct(element._id)}>
+                                                        <MdDelete/>
+                                                    </button>
+                                                </td>
 
                                             </tr>
                                         </>
@@ -99,9 +105,7 @@ export default function Products() {
                         </tbody>
                     </table>
                 </div>
-
             </div>
-
-        </>
+        </div>
     )
 }

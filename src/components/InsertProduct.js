@@ -34,7 +34,7 @@ export default function InsertProduct() {
         setError("");
 
         try {
-            const res = await fetch("http://localhost:3001/insertproduct", {
+            const res = await fetch("http://localhost:4000/insertproduct", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -66,26 +66,30 @@ export default function InsertProduct() {
     }
 
     return (
-        <div className='container-fluid p-5'>
-             <h1 className=''>Enter Product Information</h1>
-             
-            <div className="mt-5 col-lg-6 col-md-6 col-12 fs-4">
-                <label htmlFor="product_name" className="form-label fw-bold">Product Name</label>
-                <input type="text" onChange={setName} value={productName} className="form-control fs-5" id="product_name" placeholder="Enter Product Name" required />
+        <div className='h-[100vh] flex flex-col justify-center items-center'>
+            <div className='w-11/12 bg-black text-white h-[60vh] p-4 rounded-xl shadow-2xl shadow-blue-700'>
+                <h1 className='text-4xl mb-12 font-serif'>Enter Product Information</h1>
+                
+                <div className='w-[60%]'>
+                    <div className='p-2 flex flex-col gap-2'>
+                        <label htmlFor="product_name" className='font-semibold'>Product Name</label>
+                        <input type="text" className='border text-black p-1 rounded-md' onChange={setName} value={productName} id="product_name" placeholder="Enter Product Name" required />
+                    </div>
+                    <div className='p-2 flex flex-col gap-2'>
+                        <label htmlFor="product_price" className='font-semibold'>Product Price</label>
+                        <input type="text" className='border text-black p-1 rounded-md' onChange={setPrice} value={productPrice} id="product_price" placeholder="Enter Product Price" required />
+                    </div>
+                    <div className='p-2 flex flex-col gap-2'>
+                        <label htmlFor="product_barcode" className='font-semibold'>Product Barcode</label>
+                        <input type="text" className='border text-black p-1 rounded-md' onChange={setBarcode} value={productBarcode} maxLength={12} id="product_barcode" placeholder="Enter Product Barcode" required />
+                    </div>
+                    <div className='flex gap-5 mt-5 justify-center'>
+                        <NavLink to="/products" className='bg-blue-500 px-4 py-2 rounded-md text-white' >Cancel</NavLink>
+                        <button type="submit" className='bg-blue-500 px-4 py-2 rounded-md text-white' onClick={addProduct} disabled={loading}>{loading ? 'Inserting...' : 'Insert'}</button>
+                    </div>
+                </div>
             </div>
-            <div className="mt-3 col-lg-6 col-md-6 col-12 fs-4">
-                <label htmlFor="product_price" className="form-label fw-bold">Product Price</label>
-                <input type="number" onChange={setPrice} value={productPrice} className="form-control fs-5" id="product_price" placeholder="Enter Product Price" required />
-            </div>
-            <div className="mt-3 mb-5 col-lg-6 col-md-6 col-12 fs-4">
-                <label htmlFor="product_barcode" className="form-label fw-bold">Product Barcode</label>
-                <input type="number" onChange={setBarcode} value={productBarcode} maxLength={12} className="form-control fs-5" id="product_barcode" placeholder="Enter Product Barcode" required />
-            </div>
-            <div className='d-flex justify-content-center col-lg-6 col-md-6'>
-                <NavLink to="/products" className='btn btn-primary me-5 fs-4'>Cancel</NavLink>
-                <button type="submit" onClick={addProduct} className="btn btn-primary fs-4" disabled={loading}>{loading ? 'Inserting...' : 'Insert'}</button>
-            </div>
-            <div className="col text-center col-lg-6">
+            <div className="text-red-500 text-xl font-semibold pt-12">
                 {error && <div className="text-danger mt-3 fs-5 fw-bold">{error}</div>}
             </div>
         </div>
