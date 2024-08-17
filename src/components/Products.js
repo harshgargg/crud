@@ -13,7 +13,7 @@ export default function Products() {
     const getProducts = async (e) => {
 
         try {
-            const res = await fetch("http://localhost:4000/products", {
+            const res = await fetch("https://crud-task-s8b4.onrender.com/products", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
